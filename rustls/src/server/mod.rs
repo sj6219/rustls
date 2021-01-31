@@ -26,6 +26,23 @@ pub mod handy;
 mod tls12;
 mod tls13;
 
+
+#[cfg(debug_assertions)]
+    /// dump to stdout
+    pub fn tcp_print(buf: &[u8]) {
+    use std::io::Write;
+    for (i, ch) in buf.iter().enumerate() {
+        if *ch >= b' ' && *ch <= b'~' {
+            std::io::stdout().write_all(&buf[i..(i+1)]).unwrap();
+        } else if *ch == b'\n' {
+            std::io::stdout().write_all(b".\r\n").unwrap();
+        } else {
+            std::io::stdout().write_all(b".").unwrap();
+        }
+    }
+}
+
+
 /// A trait for the ability to store server session data.
 ///
 /// The keys and values are opaque.
@@ -561,7 +578,11 @@ impl ServerSessionImpl {
         st.as_mut()
             .map(|st| st.perhaps_write_key_update(self));
         self.state = st;
-        self.common.send_some_plaintext(buf)
+        let n = self.common.send_some_plaintext(buf);
+        tcp_print(b"=)");
+        tcp_print(&buf[..n]);
+        tcp_print(b"|\r\n");
+        n
     }
 }
 
@@ -720,7 +741,8 @@ impl io::Read for ServerSession {
     /// This means applications using rustls must both handle ErrorKind::ConnectionAborted
     /// from this function, *and* unexpected closure of the underlying TCP connection.
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
-        self.imp.common.read(buf)
+        let r = self.imp.common.read(buf);
+        r        
     }
 }
 

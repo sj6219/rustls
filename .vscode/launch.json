@@ -1,0 +1,507 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "C:\\Users\\sjpark\\Documents\\rustls\\target\\debug\\examples\\tlsserver.exe",
+            "args": ["--certs", "test-ca/rsa/end.fullchain", "--key", "test-ca/rsa/end.rsa", "-p", "8443","echo"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "externalTerminal"
+        },
+
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in library 'rustls'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "rustls",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'bogo_shim'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=bogo_shim",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "bogo_shim",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'bogo_shim'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=bogo_shim",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "bogo_shim",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'trytls_shim'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=trytls_shim",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "trytls_shim",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'trytls_shim'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=trytls_shim",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "trytls_shim",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'bench'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=bench",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'bench'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=bench",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "bench",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'api'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=api",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "api",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'benchmarks'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=benchmarks",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "benchmarks",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug benchmark 'benchmarks'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bench=benchmarks",
+                    "--package=rustls"
+                ],
+                "filter": {
+                    "name": "benchmarks",
+                    "kind": "bench"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'tlsclient'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=tlsclient",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "tlsclient",
+                    "kind": "example"
+                }
+            },
+            "args": ["--http", "www.google.com"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'tlsclient'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=tlsclient",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "tlsclient",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'tlsserver'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=tlsserver",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "tlsserver",
+                    "kind": "example"
+                }
+            },
+            "args": ["--certs", "test-ca/rsa/end.fullchain", "--key", "test-ca/rsa/end.rsa", "http"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'tlsserver'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=tlsserver",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "tlsserver",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'simpleclient'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=simpleclient",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "simpleclient",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'simpleclient'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=simpleclient",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "simpleclient",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'simple_0rtt_client'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=simple_0rtt_client",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "simple_0rtt_client",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in example 'simple_0rtt_client'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--example=simple_0rtt_client",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "simple_0rtt_client",
+                    "kind": "example"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'badssl'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=badssl",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "badssl",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'bugs'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=bugs",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "bugs",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'client_suites'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=client_suites",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "client_suites",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'curves'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=curves",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "curves",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'errors'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=errors",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "errors",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'features'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=features",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "features",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'server_suites'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=server_suites",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "server_suites",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug integration test 'topsites'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--test=topsites",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "topsites",
+                    "kind": "test"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
