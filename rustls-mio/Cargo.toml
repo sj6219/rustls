@@ -8,7 +8,7 @@ description = "Rustls example code and tests that depend on mio."
 publish = false
 
 [features]
-default = ["logging", "dangerous_configuration" ]
+default = ["logging" ]
 logging = ["log"]
 dangerous_configuration = ["rustls/dangerous_configuration"]
 quic = ["rustls/quic"]
