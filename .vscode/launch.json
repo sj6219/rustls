@@ -218,7 +218,8 @@
                     "kind": "example"
                 }
             },
-            "args": ["--http", "gamecodi.com"],
+            "args": ["--http", "google.com"],
+            //"args": ["--cafile", "test-ca/rsa/ca.cert", "--http", "localhost"],
             "cwd": "${workspaceFolder}"
         },
         {
