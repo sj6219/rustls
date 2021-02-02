@@ -22,6 +22,27 @@ use std::io::{Read, Write};
 use std::collections::VecDeque;
 use std::io;
 
+#[cfg(debug_assertions)]
+    /// dump to stdout
+    pub fn tcp_print(buf: &[u8]) {
+    use std::io::Write;
+    
+    for (i, ch) in buf.iter().enumerate() {
+        if i == 500 {
+            std::io::stdout().write_all(b"...").unwrap();
+            break;
+        }
+        if *ch >= b' ' && *ch <= b'~' {
+            std::io::stdout().write_all(&buf[i..(i+1)]).unwrap();
+        } else if *ch == b'\n' {
+            std::io::stdout().write_all(b".\r\n").unwrap();
+        } else {
+            std::io::stdout().write_all(b".").unwrap();
+        }
+    }
+}
+
+
 /// Generalises `ClientSession` and `ServerSession`
 pub trait Session: quic::QuicExt + Read + Write + Send + Sync {
     /// Read TLS content from `rd`.  This method does internal
@@ -665,7 +686,13 @@ impl SessionCommon {
     /// If internal buffers are too small, this function will not accept
     /// all the data.
     pub fn send_some_plaintext(&mut self, data: &[u8]) -> usize {
-        self.send_plain(data, Limit::Yes)
+        let n = self.send_plain(data, Limit::Yes);
+        if n > 0 {
+            tcp_print(b")");
+            tcp_print(&data[..n]);
+            tcp_print(b"|\n");
+        }
+        n
     }
 
     pub fn send_early_plaintext(&mut self, data: &[u8]) -> usize {
@@ -784,7 +811,11 @@ impl SessionCommon {
                 "CloseNotify alert received",
             ));
         }
-
+        if len > 0 {
+            tcp_print(b"(");
+            tcp_print(&buf[..len]);
+            tcp_print(b"|\n");
+        }
         Ok(len)
     }
 

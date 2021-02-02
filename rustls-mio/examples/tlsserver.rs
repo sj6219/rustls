@@ -251,14 +251,6 @@ impl Connection {
         let mut buf = Vec::new();
 
         let rc = self.tls_session.read_to_end(&mut buf);
-        if let Ok(n) = rc {
-            if n > 0 {
-                rustls::tcp_print(b"=(");
-                rustls::tcp_print(&buf[..n]);
-                rustls::tcp_print(b"|\r\n");
-            }
-        } 
-
         if rc.is_err() {
             error!("plaintext read failed: {:?}", rc);
             self.closing = true;

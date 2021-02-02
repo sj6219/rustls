@@ -282,7 +282,7 @@ pub use crate::verify::{
     AllowAnyAnonymousOrAuthenticatedClient, AllowAnyAuthenticatedClient, NoClientAuth,
 };
 
-pub use crate::server::tcp_print;
+pub use crate::session::tcp_print;
 
 /// All defined ciphersuites appear in this module.
 ///

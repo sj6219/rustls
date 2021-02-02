@@ -27,20 +27,6 @@ mod tls12;
 mod tls13;
 
 
-#[cfg(debug_assertions)]
-    /// dump to stdout
-    pub fn tcp_print(buf: &[u8]) {
-    use std::io::Write;
-    for (i, ch) in buf.iter().enumerate() {
-        if *ch >= b' ' && *ch <= b'~' {
-            std::io::stdout().write_all(&buf[i..(i+1)]).unwrap();
-        } else if *ch == b'\n' {
-            std::io::stdout().write_all(b".\r\n").unwrap();
-        } else {
-            std::io::stdout().write_all(b".").unwrap();
-        }
-    }
-}
 
 
 /// A trait for the ability to store server session data.
@@ -579,9 +565,6 @@ impl ServerSessionImpl {
             .map(|st| st.perhaps_write_key_update(self));
         self.state = st;
         let n = self.common.send_some_plaintext(buf);
-        tcp_print(b"=)");
-        tcp_print(&buf[..n]);
-        tcp_print(b"|\r\n");
         n
     }
 }

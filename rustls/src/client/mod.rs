@@ -646,7 +646,8 @@ impl ClientSessionImpl {
             .map(|st| st.perhaps_write_key_update(self));
         self.state = st;
 
-        self.common.send_some_plaintext(buf)
+        let n = self.common.send_some_plaintext(buf);
+        n
     }
 }
 

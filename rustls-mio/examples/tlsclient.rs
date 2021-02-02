@@ -121,9 +121,9 @@ impl TlsClient {
             .tls_session
             .read_to_end(&mut plaintext);
         if !plaintext.is_empty() {
-            io::stdout()
-                .write_all(&plaintext)
-                .unwrap();
+            // io::stdout()
+            //     .write_all(&plaintext)
+            //     .unwrap();
         }
 
         // If that fails, the peer might have started a clean TLS-level
