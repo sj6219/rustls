@@ -218,8 +218,8 @@
                     "kind": "example"
                 }
             },
-            "args": ["--http", "google.com"],
-            //"args": ["--cafile", "test-ca/rsa/ca.cert", "--http", "localhost"],
+            //"args": ["--http", "google.com"],
+            "args": ["--cafile", "test-ca/rsa/ca.cert", "localhost"],
             "cwd": "${workspaceFolder}"
         },
         {
@@ -256,7 +256,7 @@
                     "kind": "example"
                 }
             },
-            "args": ["--certs", "test-ca/rsa/end.fullchain", "--key", "test-ca/rsa/end.rsa", "http"],
+            "args": ["--certs", "test-ca/rsa/end.fullchain", "--key", "test-ca/rsa/end.rsa", "forward", "5700"],
             "cwd": "${workspaceFolder}"
         },
         {
