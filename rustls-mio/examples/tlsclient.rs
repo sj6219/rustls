@@ -69,12 +69,34 @@ impl TlsClient {
     }
 
     fn read_source_to_end(&mut self, rd: &mut dyn io::Read) -> io::Result<usize> {
-        let mut buf = Vec::new();
-        let len = rd.read_to_end(&mut buf)?;
-        self.tls_session
-            .write_all(&buf)
-            .unwrap();
-        Ok(len)
+        // let mut buf = Vec::new();
+        // let len = rd.read_to_end(&mut buf)?;
+        unsafe {
+            std::io::stdout().write_all(b"Input> ");
+            std::io::stdout().flush();
+
+            let mut buf = Vec::new();
+            let len = rd.read_to_end(&mut buf)?;
+
+            // let mut buf = Vec::with_capacity(1000);
+            // buf.set_len(1000);
+            // let len = rd.read(&mut buf)?;
+            // buf.set_len(len);
+            
+            if len == 0 {
+                std::io::stdout().write_all(b"\r");
+                std::io::stdout().flush();
+            }
+            else {
+                std::io::stdout().write_all(b"\r\n");
+                std::io::stdout().flush();
+
+                self.tls_session
+                .write_all(&buf)
+                .unwrap();
+            }
+            Ok(len)
+        }
     }
 
     /// We're ready to do a read.
@@ -616,7 +638,18 @@ fn main() {
     tlsclient.register(poll.registry());
 
     loop {
-        poll.poll(&mut events, None).unwrap();
+        //poll.poll(&mut events, None).unwrap();
+        poll.poll(&mut events, Some(core::time::Duration::from_secs(1)));
+        if events.is_empty() {
+            let mut stdin = io::stdin();
+            tlsclient
+                .read_source_to_end(&mut stdin)
+                .unwrap();
+                
+            //tlsclient.do_read();
+            tlsclient.do_write();
+            continue;
+        }
 
         for ev in events.iter() {
             tlsclient.ready(&ev);

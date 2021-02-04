@@ -5,6 +5,43 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'tlsclient'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=tlsclient",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "tlsclient",
+                    "kind": "example"
+                }
+            },
+            //"args": ["--http", "google.com"],
+            "args": ["--cafile", "test-ca/rsa/ca.cert", "localhost"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug example 'tlsserver'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--example=tlsserver",
+                    "--package=rustls-mio"
+                ],
+                "filter": {
+                    "name": "tlsserver",
+                    "kind": "example"
+                }
+            },
+            "args": ["--certs", "test-ca/rsa/end.fullchain", "--key", "test-ca/rsa/end.rsa", "forward", "5700"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",
@@ -206,25 +243,6 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug example 'tlsclient'",
-            "cargo": {
-                "args": [
-                    "build",
-                    "--example=tlsclient",
-                    "--package=rustls-mio"
-                ],
-                "filter": {
-                    "name": "tlsclient",
-                    "kind": "example"
-                }
-            },
-            //"args": ["--http", "google.com"],
-            "args": ["--cafile", "test-ca/rsa/ca.cert", "localhost"],
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
             "name": "Debug unit tests in example 'tlsclient'",
             "cargo": {
                 "args": [
@@ -239,24 +257,6 @@
                 }
             },
             "args": [],
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug example 'tlsserver'",
-            "cargo": {
-                "args": [
-                    "build",
-                    "--example=tlsserver",
-                    "--package=rustls-mio"
-                ],
-                "filter": {
-                    "name": "tlsserver",
-                    "kind": "example"
-                }
-            },
-            "args": ["--certs", "test-ca/rsa/end.fullchain", "--key", "test-ca/rsa/end.rsa", "forward", "5700"],
             "cwd": "${workspaceFolder}"
         },
         {

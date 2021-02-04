@@ -28,7 +28,7 @@ use std::io;
     use std::io::Write;
     
     for (i, ch) in buf.iter().enumerate() {
-        if i == 500 {
+        if i == 5000 {
             std::io::stdout().write_all(b"...").unwrap();
             break;
         }

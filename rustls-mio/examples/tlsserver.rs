@@ -651,7 +651,17 @@ fn main() {
 
     let mut events = mio::Events::with_capacity(256);
     loop {
-        poll.poll(&mut events, None).unwrap();
+        //poll.poll(&mut events, None).unwrap();
+        poll.poll(&mut events, Some(core::time::Duration::from_secs(1)));
+        if events.is_empty() {
+            for (_, v) in tlsserv.connections.iter_mut() {
+                //v.do_tls_read();
+                //v.try_plain_read();
+                v.try_back_read();
+                v.do_tls_write_and_handle_error();
+            }
+            continue;
+        }
 
         for event in events.iter() {
             match event.token() {
